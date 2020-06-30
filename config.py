@@ -1,4 +1,6 @@
-TOKEN = 'NzI2NDcxNjM1MTEyMDM0NDE1.XvdxfA.OpbNEden-9yjMgsbwijEa7h1z6w'	# bot token
+import bot_token
+
+TOKEN = bot_token.TOKEN	# bot token
 
 POST_ID = 0	# post id to read reactions from
 
