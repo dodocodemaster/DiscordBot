@@ -39,7 +39,7 @@ class MyClient(discord.Client):
 			lna_stat = ozstat.LNA(nick)
 			await channel.send(lna_stat)
 		if mess.find('бля') > -1:
-			phrase_kek = ['Мда', 'Ты пидр', 'Пизда', 'Ору', 'Ди нах', 'Хуй саси', 'Ну ты и петушара', 'Я напоминаю, что Виталька лох', 'Хуй']
+			phrase_kek = ['Мда', 'Ты пидр', 'Пизда', 'Ору!', 'Ди нах', 'Хуй саси', 'Ну ты и петушара', 'Я напоминаю, что Виталька лох', 'Хуй']
 			kekich = choice(phrase_kek)
 			await channel.send(kekich)
 
