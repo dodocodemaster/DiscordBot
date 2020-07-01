@@ -6,6 +6,7 @@ from random import choice
 import config
 import weather
 import bvid
+import ozstat
 
 class MyClient(discord.Client):
 	async def on_ready(self):
