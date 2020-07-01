@@ -8,6 +8,7 @@ import weather
 import bvid
 import ozstat
 import press_f
+import maestro
 
 class MyClient(discord.Client):
 	async def on_ready(self):
@@ -46,7 +47,11 @@ class MyClient(discord.Client):
 		if mess.find('F') == 0 and len(mess) == 1:
 			file = press_f.rand_pic_f()
 			await message.channel.send("", file=file)
-
+		if mess.find('Маэстро ') == 0:
+			maes = mess.replace("Маэстро ", "")
+			file = maestro.put_text_pil(maes)
+			if file != False:
+				await message.channel.send("", file=file)
 
 client = MyClient()
 client.run(config.TOKEN)
