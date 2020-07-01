@@ -7,17 +7,18 @@ def LNA(nickname):
 
 
     response = requests.get(url)
+    try:
+        soup = bs(response._content , "lxml")
+        stat = soup.find('div', attrs={'class': 'panel-body'})
+        games = stat.find_all('b', attrs={'class': 'text-success'})
 
-    soup = bs(response._content , "lxml")
-    stat = soup.find('div', attrs={'class': 'panel-body'})
-    games = stat.find_all('b', attrs={'class': 'text-success'})
-
-    pts = str(games[0].next) 
-    games_value = str(games[1].next)
-    win = str(games[2].next)
-    lose = str(games[3].next)
-    wr = str(games[6].next)
-
+        pts = str(games[0].next)
+        games_value = str(games[1].next)
+        win = str(games[2].next)
+        lose = str(games[3].next)
+        wr = str(games[6].next)
+    except Exception:
+        return 'Игрок '+nickname+' не найден!'
 
     result ='⚔️PTS: '+ pts + '\n🕹️К-во игр: ' + games_value + '\n🛡Побед: ' + win +  "%"+ '\n☠Поражений: ' + lose + '\n♥️WinRate: ' + wr
     

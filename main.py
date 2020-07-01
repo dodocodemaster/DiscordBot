@@ -35,9 +35,13 @@ class MyClient(discord.Client):
 			id_yt = bvid.youtube_search()
 			await channel.send('https://www.youtube.com/watch?v='+ id_yt)	
 		if mess.find('Жиза ') == 0:
-            		nick = mess.replace("Жиза ", "")
-            		lna_stat = ozstat.LNA(nick)
-            		await channel.send(lna_stat)
+			nick = mess.replace("Жиза ", "")
+			lna_stat = ozstat.LNA(nick)
+			await channel.send(lna_stat)
+		if mess.find('бля') > -1:
+			phrase_kek = ['Мда', 'Ты пидр', 'Пизда', 'Ору', 'Ди нах', 'Хуй саси', 'Ну ты и петушара', 'Я напоминаю, что Виталька лох', 'Хуй']
+			kekich = choice(phrase_kek)
+			await channel.send(kekich)
 
 client = MyClient()
 client.run(config.TOKEN)
