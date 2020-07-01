@@ -1,12 +1,13 @@
-import re
+#import re
 import discord
-from discord import utils
+#from discord import utils
 from random import choice
 
 import config
 import weather
 import bvid
 import ozstat
+import press_f
 
 class MyClient(discord.Client):
 	async def on_ready(self):
@@ -42,6 +43,10 @@ class MyClient(discord.Client):
 			phrase_kek = ['Мда', 'Ты пидр', 'Пизда', 'Ору!', 'Ди нах', 'Хуй саси', 'Ну ты и петушара', 'Я напоминаю, что Виталька лох', 'Хуй']
 			kekich = choice(phrase_kek)
 			await channel.send(kekich)
+		if mess.find('F') == 0 and len(mess) == 1:
+			file = press_f.rand_pic_f()
+			await message.channel.send("", file=file)
+
 
 client = MyClient()
 client.run(config.TOKEN)
