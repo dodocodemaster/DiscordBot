@@ -6,6 +6,7 @@ from random import choice
 import config
 import weather
 import bvid
+import ozstat
 
 class MyClient(discord.Client):
 	async def on_ready(self):
@@ -34,9 +35,9 @@ class MyClient(discord.Client):
 			id_yt = bvid.youtube_search()
 			await channel.send('https://www.youtube.com/watch?v='+ id_yt)	
 		if mess.find('Жиза ') == 0:
-            nick = mess.replace("Жиза ", "")
-            lna_stat = ozstat.LNA(nick)
-            await channel.send(lna_stat)
+            		nick = mess.replace("Жиза ", "")
+            		lna_stat = ozstat.LNA(nick)
+            		await channel.send(lna_stat)
 
 client = MyClient()
 client.run(config.TOKEN)
