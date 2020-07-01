@@ -20,6 +20,6 @@ def LNA(nickname):
     except Exception:
         return 'Игрок '+nickname+' не найден!'
 
-    result ='⚔️PTS: '+ pts + '\n🕹️К-во игр: ' + games_value + '\n🛡Побед: ' + win +  "%"+ '\n☠Поражений: ' + lose + '\n♥️WinRate: ' + wr
+    result ='⚔️PTS: '+ pts + '\n🕹️К-во игр: ' + games_value + '\n🛡Побед: ' + win + '\n☠Поражений: ' + lose + '\n♥️WinRate: ' + wr +  "%"
     
     return result
