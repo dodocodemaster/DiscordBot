@@ -2,8 +2,9 @@
 
 from googleapiclient.discovery import build
 import random
+from tokens import yt_token
 
-DEVELOPER_KEY = 'AIzaSyAMxv2lEGzHIM8Y2L8EJNr8LrUBZQWBja8'
+DEVELOPER_KEY = yt_token.DEVELOPER_KEY
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 

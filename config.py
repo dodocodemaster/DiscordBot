@@ -1,4 +1,4 @@
-import bot_token
+from tokens import bot_token
 
 TOKEN = bot_token.TOKEN	# bot token
 
