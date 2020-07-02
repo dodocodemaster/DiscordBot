@@ -7,16 +7,13 @@ DEVELOPER_KEY = 'AIzaSyAMxv2lEGzHIM8Y2L8EJNr8LrUBZQWBja8'
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 
-prefix = ['IMG ', 'IMG_', 'IMG-', 'DSC ']
-postfix = [' MOV', '.MOV', ' .MOV']
-
-def youtube_search():
+def youtube_search(word):
   youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
 
   search_response = youtube.search().list(
-    q=random.choice(prefix) + str(random.randint(999, 9999)) + random.choice(postfix),
+    q=word,
     part='snippet',
-    maxResults=5
+    maxResults=100
   ).execute()
 
   videos = []
@@ -24,4 +21,10 @@ def youtube_search():
   for search_result in search_response.get('items', []):
     if search_result['id']['kind'] == 'youtube#video':
       videos.append('%s' % (search_result['id']['videoId']))
-  return (videos[random.randint(0, 2)])
+
+  if len(videos) == 0:
+    result = "По запросу " + "{" + word + "} - нихуя не найдено!"
+  else:
+    result = 'https://www.youtube.com/watch?v=' + videos[random.randint(0, len(videos)-1)]
+
+  return result

@@ -1,6 +1,5 @@
-#import re
+
 import discord
-#from discord import utils
 from random import choice
 
 import config
@@ -18,7 +17,7 @@ class MyClient(discord.Client):
 		print('Message from {0.author}: {0.content}'.format(message))
 		channel = message.channel
 		mess = '{0.content}'.format(message)
-		if mess == 'СукаБот!':
+		if mess.lower() == 'сукабот!':
 			await channel.send("Привет! Я СукаБот. Могу рассказать какая сейчас \
 погода в интересующем вас городе. Если спросите меня Кто, я вам отвечу. Ещё ты можешь\
 попросить у меня рандомное видео с youtube.Больше я нихуя не умею.")
@@ -33,18 +32,19 @@ class MyClient(discord.Client):
 			start_phrase = ['', 'Конечно же, ', 'Несомненно, ', 'Сто пудов, ', 'Невероятно, но ', 'Да, ']
 			phrase = choice(start_phrase) + user.mention + " " + phrase
 			await channel.send(phrase)
-		if mess.find('Рандом видос') == 0:
-			id_yt = bvid.youtube_search()
-			await channel.send('https://www.youtube.com/watch?v='+ id_yt)	
+		if mess.find('Сука ютуб ') == 0:
+			search_word = mess.replace("Сука ютуб ", "")
+			id_yt = bvid.youtube_search(search_word)
+			await channel.send(id_yt)
 		if mess.find('Жиза ') == 0:
 			nick = mess.replace("Жиза ", "")
 			lna_stat = ozstat.LNA(nick)
 			await channel.send(lna_stat)
-		if mess.find('бля') > -1:
+		if mess.lower().find('бл') > -1 or mess.lower().find('пиз') > -1:
 			phrase_kek = ['Мда', 'Ты пидр', 'Пизда', 'Ору!', 'Ди нах', 'Хуй саси', 'Ну ты и петушара', 'Я напоминаю, что Виталька лох', 'Хуй']
 			kekich = choice(phrase_kek)
 			await channel.send(kekich)
-		if mess.find('F') == 0 and len(mess) == 1:
+		if mess.lower().find('f') == 0 and len(mess) == 1:
 			file = press_f.rand_pic_f()
 			await message.channel.send("", file=file)
 		if mess.find('Маэстро ') == 0:
