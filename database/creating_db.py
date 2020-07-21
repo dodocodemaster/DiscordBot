@@ -6,6 +6,9 @@ cursor = conn.cursor()
 def create_db(cursor):
     cursor.execute("""CREATE TABLE users (user_id, name, status, lastdate, rating, bot, discriminator, avatar)""")
 
+def create_phrases_table(cursor):
+    cursor.execute("""CREATE TABLE phrases (Id INTEGER PRIMARY KEY,phrase, date)""")
+
 def add_user(userdict: dict):
     user = [(userdict.get('id'), userdict.get('name'), 'online', '04.07.2020',0,userdict.get('bot'),
              userdict.get('discriminator'), userdict.get('avatar'))]
@@ -14,7 +17,8 @@ def add_user(userdict: dict):
 
     conn.commit()
 
-#create_db(cursor)
+create_db(cursor)
+create_phrases_table(cursor)
 
 user = {'id': 1231, 'name': 'Test', 'bot': 1, 'discriminator': 12123, 'avatar': 'kkks'}
 
