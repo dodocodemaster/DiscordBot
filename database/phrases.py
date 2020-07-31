@@ -17,8 +17,8 @@ def add_phrases(phrase) -> object:
         words_count = 0
         if len(lst) > 3:
 
-            # соберём слова обратно во фразы, но со случайным количеством слов (от 1 до 5)
-            words_count = randint(1, 4)
+            # соберём слова обратно во фразы, но со случайным количеством слов (от 1 до 7)
+            words_count = randint(1, 6)
             for j in range(words_count):
                 try:
                     el = el + " " + lst[i + j + 1]
@@ -58,15 +58,37 @@ def create_phrase(user_phr):
 
     new_phrase = ""
     old_result = ""
+
+    # сделаем поиск по случаному слову из сообщения
+    fword = choice(lst)
+
+    finded = False
+
+
+    # и установим переключатель использования этой фразы
+    fword_used = False
+
+    # определим есть ли в базе фразы с данным словом
+    cursor.execute('SELECT COUNT(*) FROM phrases WHERE phrase LIKE ?', ['%' + fword + '%'])
+    count_find = cursor.fetchone()
+
+    # если фразы есть, выгрузим их в results и выберем случайную, которую в дальнейшем и используем
+    if count_find[0] != 0:
+        cursor.execute('SELECT phrase FROM phrases WHERE phrase LIKE ?', ['%' + fword + '%'])
+        results = cursor.fetchall()
+        fresult = choice(results)[0]
+        finded = True
+
     for i in range(len_new_phr):
 
-        #fword = choice(lst)
-        #cursor.execute('SELECT COUNT(*) FROM phrases WHERE phrase=?', [fword])
-        #count_find = cursor.fetchone()
-        #if count_find[0] != 1:
-        #    cursor.execute('SELECT phrase FROM phrases WHERE phrase LIKE %?%', [fword])
-        #    results = cursor.fetchall()
-        #    result = choice(results)[0]
+        if finded == True:
+            # определим вероятность использования фразы с этим словом в генерируемом сообщении
+            rand_use_fword = randint(0, 10)
+
+            # Если условия удовлетворяют, прибавим к нашему генерируемому сообщению
+            if rand_use_fword > 1 and fword_used == False:
+                new_phrase = new_phrase + " " + fresult
+                fword_used = True
 
         int_id = (randint(1, count_table[0]))
         cursor.execute('SELECT phrase FROM phrases WHERE Id=?', [int_id])
