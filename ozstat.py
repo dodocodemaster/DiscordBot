@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 
 
 def LNA(nickname):
-    url = 'https://stats.onligamez.ru/?u='+ nickname +'&s=wc3.theabyss.ru&st=10&lang=RU'
+    url = 'https://stats.onligamez.ru/?u='+ nickname +'&s=oz-bnet&st=10&lang=RU'
 
 
     response = requests.get(url)
